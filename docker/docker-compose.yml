@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+    php:
+        container_name: weroad_assessment_php
+        env_file:
+            - ../.env
+
+    cron:
+        container_name: weroad_assessment_cron
+        env_file:
+            - ../.env
+
+    mariadb:
+        container_name: weroad_assessment_db
+        env_file:
+            - ../.env
+        image: 'mariadb:10'
