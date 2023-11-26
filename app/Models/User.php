@@ -14,6 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property string $id
+ * @property string $name
  * @property string $email
  * @property string $password
  * @property null|Collection<Role> $roles
@@ -44,7 +45,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
