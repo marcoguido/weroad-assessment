@@ -44,6 +44,12 @@ do-composer-update:
 		-f docker/docker-compose.$(APP_ENV).yml \
 		exec php bash -ci 'composer update'
 
+api-docs:
+	@docker compose \
+		-f docker/docker-compose.yml \
+		-f docker/docker-compose.$(APP_ENV).yml \
+		exec php bash -ci 'composer generate-api-docs'
+
 up-d:
 	@docker compose \
 		-f docker/docker-compose.yml \
