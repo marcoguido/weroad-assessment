@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 /**
  * @property string $id
@@ -27,6 +29,7 @@ class Travel extends Model
     const UPDATED_AT = 'updatedAt';
 
     use HasFactory;
+    use HasSlug;
     use HasUuids;
 
     protected $table = 'travels';
@@ -63,5 +66,15 @@ class Travel extends Model
             related: Tour::class,
             foreignKey: 'travelId',
         );
+    }
+
+    /**
+     * Defines the options for generating travel slug
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
     }
 }
