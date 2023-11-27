@@ -29,6 +29,8 @@ class Travel extends Model
     use HasFactory;
     use HasUuids;
 
+    protected $table = 'travels';
+
     /**
      * @var array<int, string>
      */
@@ -48,6 +50,7 @@ class Travel extends Model
         'isPublic' => 'boolean',
         'numberOfDays' => 'integer',
         'numberOfNights' => 'integer',
+        'moods' => 'array',
     ];
 
     /**
