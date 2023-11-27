@@ -18,6 +18,10 @@ return new class extends Migration
                 ->constrained(table: 'travels')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->string('name');
+            $table->date('startingDate');
+            $table->date('endingDate');
+            $table->unsignedInteger('price');
             $table->timestamp(Tour::CREATED_AT)->nullable();
             $table->timestamp(Tour::UPDATED_AT)->nullable();
         });
