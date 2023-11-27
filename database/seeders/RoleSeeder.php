@@ -6,6 +6,9 @@ use App\Constants\UserRole;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 
+/**
+ * @extends Seeder<Role>
+ */
 class RoleSeeder extends Seeder
 {
     /**
