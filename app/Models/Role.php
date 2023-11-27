@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\UserRole;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,4 +29,18 @@ class Role extends Model
         'id',
         'name',
     ];
+
+    public static function admin(): Role
+    {
+        return static::query()
+            ->where('name', '=', UserRole::ADMIN->value)
+            ->firstOrFail();
+    }
+
+    public static function editor(): Role
+    {
+        return static::query()
+            ->where('name', '=', UserRole::EDITOR->value)
+            ->firstOrFail();
+    }
 }
