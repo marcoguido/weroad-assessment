@@ -8,6 +8,7 @@ class TravelResource extends Data
 {
     public function __construct(
         public readonly bool $isPublic,
+        public readonly string $slug,
         public readonly string $name,
         public readonly string $description,
         public readonly int $numberOfDays,
