@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasIdentifier;
+use App\Models\Identifiers\TravelId;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,12 +27,13 @@ use Spatie\Sluggable\SlugOptions;
  */
 class Travel extends Model
 {
-    const CREATED_AT = 'createdAt';
-    const UPDATED_AT = 'updatedAt';
-
     use HasFactory;
+    use HasIdentifier;
     use HasSlug;
     use HasUuids;
+
+    const CREATED_AT = 'createdAt';
+    const UPDATED_AT = 'updatedAt';
 
     protected $table = 'travels';
 
@@ -56,6 +59,8 @@ class Travel extends Model
         'moods' => 'array',
     ];
 
+    public static string $identifierClass = TravelId::class;
+
     /**
      * Definition of the relationship joining a travel
      * with its tours
@@ -76,5 +81,10 @@ class Travel extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasIdentifier;
+use App\Models\Identifiers\TourId;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,12 +24,13 @@ use Illuminate\Support\Carbon;
  */
 class Tour extends Model
 {
+    use HasFactory;
+    use HasIdentifier;
+    use HasUuids;
+
     const DATE_FORMAT = 'Y-m-d';
     const CREATED_AT = 'createdAt';
     const UPDATED_AT = 'updatedAt';
-
-    use HasFactory;
-    use HasUuids;
 
     /**
      * @var array<integer, string>
@@ -50,12 +53,7 @@ class Tour extends Model
         'price' => 'integer',
     ];
 
-    /**
-     * @var array<integer, string>
-     */
-    protected $appends = [
-        'formattedPrice',
-    ];
+    public static string $identifierClass = TourId::class;
 
     /**
      * Relationship definition to get the travel associated to
