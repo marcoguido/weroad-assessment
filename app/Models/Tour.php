@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
  */
 class Tour extends Model
 {
+    const DATE_FORMAT = 'Y-m-d';
     const CREATED_AT = 'createdAt';
     const UPDATED_AT = 'updatedAt';
 
