@@ -5,13 +5,29 @@ namespace App\Http\Controllers\Api\v1;
 use App\Actions\User\FindUserByEmail;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Auth\LoginRequest;
+use App\OpenApi\RequestBodies\DoLoginRequestBody;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 
+#[OpenApi\PathItem]
 class AuthController extends Controller
 {
+    /**
+     * Login entrypoint to get a new JWT for further API calls
+     *
+     * @throws AuthorizationException
+     */
+    #[OpenApi\Operation(
+        tags: [
+            'Admin-Only',
+            'Auth',
+        ],
+        method: 'POST',
+    )]
+    #[OpenApi\RequestBody(factory: DoLoginRequestBody::class)]
     public function __invoke(FindUserByEmail $userFinder, LoginRequest $request): JsonResponse
     {
         if (! Auth::attempt($request->getCredentials())) {
