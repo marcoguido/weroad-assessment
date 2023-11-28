@@ -7,6 +7,7 @@ use Spatie\LaravelData\Data;
 class TravelResource extends Data
 {
     public function __construct(
+        public readonly string $id,
         public readonly bool $isPublic,
         public readonly string $slug,
         public readonly string $name,
