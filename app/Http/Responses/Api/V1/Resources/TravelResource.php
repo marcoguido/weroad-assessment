@@ -4,6 +4,9 @@ namespace App\Http\Responses\Api\V1\Resources;
 
 use Spatie\LaravelData\Data;
 
+/**
+ * @property array<string, int> $moods
+ */
 class TravelResource extends Data
 {
     public function __construct(

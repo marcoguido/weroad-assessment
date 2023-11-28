@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\v1\Travels;
 
 use App\Http\Requests\Api\v1\Travels\Data\TravelData;
+use App\Rules\MoodFormatRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Spatie\LaravelData\Data;
@@ -29,8 +30,10 @@ abstract class BaseTravelManipulationRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'numberOfDays' => 'required|int|min:1',
-            'moods' => 'required|array',
-            'moods.*' => 'required|integer|min:0',
+            'moods' => [
+                'required',
+                new MoodFormatRule(),
+            ],
         ];
     }
 
