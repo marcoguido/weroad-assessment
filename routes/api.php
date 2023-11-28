@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\v1\AuthController;
 use App\Http\Controllers\Api\v1\Tours\ListToursController;
+use App\Http\Controllers\Api\v1\Travels\CreateTravelController;
 use App\Http\Controllers\Api\v1\Travels\ListTravelsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,13 +25,13 @@ Route::middleware('auth:sanctum')
     ->group(function () {
         Route::prefix('/travels')->group(function () {
             Route::get('/', ListTravelsController::class);
+            Route::post('/', CreateTravelController::class);
             Route::get('/{travelId}/tours', [ListToursController::class, 'byTravelId']);
         });
 
         Route::prefix('/tours')->group(function () {
         });
     });
-
 
 Route::prefix('public')
     ->group(function () {
