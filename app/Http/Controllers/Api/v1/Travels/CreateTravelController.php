@@ -22,7 +22,7 @@ class CreateTravelController extends Controller
         $newTravel = $storeAction->execute($travelData);
 
         return new JsonResponse(
-            data: TravelResource::from($newTravel->refresh()),
+            data: TravelResource::from($newTravel),
             status: JsonResponse::HTTP_CREATED,
         );
     }
