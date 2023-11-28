@@ -23,7 +23,6 @@ class AuthController extends Controller
      */
     #[OpenApi\Operation(
         tags: [
-            'Admin-Only',
             'Auth',
         ],
         method: 'POST',
