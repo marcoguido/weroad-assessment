@@ -4,12 +4,16 @@ namespace App\Models\Identifiers;
 
 use App\Contracts\Models\Identifiers\IdentifierContract;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\LaravelData\Casts\Cast;
+use Spatie\LaravelData\Casts\Castable;
+use Spatie\LaravelData\Casts\Uncastable;
+use Spatie\LaravelData\Support\DataProperty;
 use Stringable;
 
 /**
  * @template T of Model
  */
-abstract class StringIdentifier implements IdentifierContract, Stringable
+abstract class StringIdentifier implements IdentifierContract, Stringable, Castable
 {
     public function __construct(
         public readonly string $value,
@@ -24,5 +28,24 @@ abstract class StringIdentifier implements IdentifierContract, Stringable
     public function __toString(): string
     {
         return $this->value;
+    }
+
+    public static function dataCastUsing(...$arguments): Cast
+    {
+        return new class implements Cast
+        {
+            public function cast(DataProperty $property, mixed $value, array $context): mixed
+            {
+                if (null === $value) {
+                    return Uncastable::create();
+                }
+
+                $identifierClass = array_keys(
+                    $property->type->acceptedTypes,
+                )[0];
+
+                return new $identifierClass($value);
+            }
+        };
     }
 }
