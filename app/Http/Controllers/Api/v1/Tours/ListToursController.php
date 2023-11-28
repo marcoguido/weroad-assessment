@@ -16,6 +16,11 @@ class ListToursController extends Controller
     ) {
     }
 
+    public function byTravelId(TravelId $travelId): JsonResponse
+    {
+        return $this->getTours($travelId);
+    }
+
     public function byTravelSlug(Travel $travel, GetPaginatedTravelTours $fetchAction): JsonResponse
     {
         return $this->getTours($travel->identifier);

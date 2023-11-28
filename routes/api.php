@@ -19,6 +19,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', AuthController::class);
 
+Route::middleware('auth:sanctum')
+    ->prefix('admin')
+    ->group(function () {
+        Route::prefix('/travels')->group(function () {
+            Route::get('/', ListTravelsController::class);
+            Route::get('/{travelId}/tours', [ListToursController::class, 'byTravelId']);
+        });
+
+        Route::prefix('/tours')->group(function () {
+        });
+    });
+
 
 Route::prefix('public')
     ->group(function () {
