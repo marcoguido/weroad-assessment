@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\v1\AuthController;
 use App\Http\Controllers\Api\v1\Tours\CreateTourController;
 use App\Http\Controllers\Api\v1\Tours\ListToursController;
+use App\Http\Controllers\Api\v1\Tours\UpdateTourController;
 use App\Http\Controllers\Api\v1\Travels\CreateTravelController;
 use App\Http\Controllers\Api\v1\Travels\ListTravelsController;
 use App\Http\Controllers\Api\v1\Travels\UpdateTravelController;
@@ -34,6 +35,7 @@ Route::middleware('auth:sanctum')
 
         Route::prefix('/tours')->group(function () {
             Route::post('/', CreateTourController::class);
+            Route::patch('/{tourId}', UpdateTourController::class);
         });
     });
 
