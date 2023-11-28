@@ -26,6 +26,19 @@ services:
             - mariadb
             - mailpit
 
+    phpmyadmin:
+        container_name: weroad_assessment_db_viewer
+        depends_on:
+            - mariadb
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - "8081:80"
+        environment:
+            PMA_HOST: mariadb
+            MYSQL_ROOT_PASSWORD: ''
+        networks:
+            - weroad_assessment
+
     cron:
         image: serversideup/php:8.2-cli
         command: [ "su", "webuser", "-c", "cd /var/www/html && php artisan schedule:work" ]
@@ -65,6 +78,7 @@ services:
             timeout: 5s
 
     mailpit:
+        container_name: weroad_assessment_mailer
         image: 'axllent/mailpit:latest'
         env_file:
             - ../.env
