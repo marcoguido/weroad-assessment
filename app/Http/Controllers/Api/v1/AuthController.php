@@ -6,6 +6,7 @@ use App\Actions\User\FindUserByEmail;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Auth\LoginRequest;
 use App\OpenApi\RequestBodies\DoLoginRequestBody;
+use App\OpenApi\Responses\LoginResponse;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,7 @@ class AuthController extends Controller
         method: 'POST',
     )]
     #[OpenApi\RequestBody(factory: DoLoginRequestBody::class)]
+    #[OpenApi\Response(factory: LoginResponse::class)]
     public function __invoke(FindUserByEmail $userFinder, LoginRequest $request): JsonResponse
     {
         if (! Auth::attempt($request->getCredentials())) {
