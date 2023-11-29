@@ -22,9 +22,7 @@ class AuthController extends Controller
      * @throws AuthorizationException
      */
     #[OpenApi\Operation(
-        tags: [
-            'Auth',
-        ],
+        tags: ['Auth'],
         method: 'POST',
     )]
     #[OpenApi\RequestBody(factory: DoLoginRequestBody::class)]
