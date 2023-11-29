@@ -13,7 +13,7 @@ class LoginResponse extends ResponseFactory implements Reusable
 {
     public function build(): Response
     {
-        return Response::created()
+        return Response::create()
             ->description('User successfully authenticated')
             ->content(
                 MediaType::json()->schema(

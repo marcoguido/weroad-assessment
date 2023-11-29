@@ -26,7 +26,10 @@ class AuthController extends Controller
         method: 'POST',
     )]
     #[OpenApi\RequestBody(factory: DoLoginRequestBody::class)]
-    #[OpenApi\Response(factory: LoginResponse::class)]
+    #[OpenApi\Response(
+        factory: LoginResponse::class,
+        statusCode: JsonResponse::HTTP_CREATED,
+    )]
     public function __invoke(FindUserByEmail $userFinder, LoginRequest $request): JsonResponse
     {
         if (! Auth::attempt($request->getCredentials())) {
