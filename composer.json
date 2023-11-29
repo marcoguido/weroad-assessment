@@ -12,6 +12,7 @@
         "laravel/prompts": "^0.1.13",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "nextapps/laravel-swagger-ui": "^0.8.2",
         "spatie/laravel-data": "^3.9",
         "spatie/laravel-json-api-paginate": "^1.13",
         "spatie/laravel-query-builder": "^5.6",
