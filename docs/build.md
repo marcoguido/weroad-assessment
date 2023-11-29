@@ -19,13 +19,15 @@
 4. Setup database structure and install default data by running `make run-fresh-migrations`
 5. Open a new browser window and head to `http://localhost`, you'll be greeted by a default Laravel window
 
-##  Utils
+## Utils
 
 1. If you need to connect to a shell in master container, run `make tty`
 2. If you need to seed the database with some fake data, run:
-   - `make tty` to connect to a new shell session
-   - `php artisan db:seed --class TravelSeeder`
+    - `make tty` to connect to a new shell session
+    - `php artisan db:seed --class TravelSeeder`
 3. If new migrations needs to be executed, run `make run-migrations`
 4. When done, shut everything down by running `make down`
 5. To create a new user, run `make admin-user` and follow the prompts
-6. Take a look at `Makefile` targets for other useful commands and routines
+6. If you need to access the database without the hassle of configuring a local client, there is an instance
+   of [PhpMyAdmin](http://localhost:8081) running. Login credentials are `root` as username and an empty password.
+7. Take a look at `Makefile` targets for other useful commands and routines
