@@ -27,4 +27,5 @@
    - `php artisan db:seed --class TravelSeeder`
 3. If new migrations needs to be executed, run `make run-migrations`
 4. When done, shut everything down by running `make down`
-5. Take a look at `Makefile` steps for other useful commands and routines
+5. To create a new user, run `make admin-user` and follow the prompts
+6. Take a look at `Makefile` targets for other useful commands and routines

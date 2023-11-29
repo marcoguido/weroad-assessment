@@ -57,6 +57,13 @@ api-docs:
 		-f docker/docker-compose.$(APP_ENV).yml \
 		exec php bash -ci 'composer generate-api-docs'
 
+# Generates a new user with administrative privileges
+admin-user:
+	@docker compose \
+		-f docker/docker-compose.yml \
+		-f docker/docker-compose.$(APP_ENV).yml \
+		exec php bash -ci 'php artisan make:admin-user'
+
 # Boots up the application as daemon
 up-d:
 	@docker compose \
