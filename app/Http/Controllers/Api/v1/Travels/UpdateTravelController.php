@@ -8,6 +8,7 @@ use App\Http\Requests\Api\v1\Travels\Data\TravelData;
 use App\Http\Requests\Api\v1\Travels\UpdateTravelRequest;
 use App\Http\Responses\Api\V1\Resources\TravelResource;
 use App\Models\Identifiers\TravelId;
+use App\OpenApi\Parameters\TravelUpdateParameters;
 use App\OpenApi\RequestBodies\Travels\UpdateTravelRequestBody;
 use App\OpenApi\Responses\Travels\TravelUpdatedResponse;
 use App\OpenApi\SecuritySchemes\TokenSecurityScheme;
@@ -28,6 +29,7 @@ class UpdateTravelController extends Controller
         security: TokenSecurityScheme::class,
         method: 'PATCH',
     )]
+    #[OpenApi\Parameters(factory: TravelUpdateParameters::class)]
     #[OpenApi\RequestBody(factory: UpdateTravelRequestBody::class)]
     #[OpenApi\Response(factory: TravelUpdatedResponse::class)]
     public function __invoke(

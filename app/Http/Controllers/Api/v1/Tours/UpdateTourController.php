@@ -8,6 +8,8 @@ use App\Http\Requests\Api\v1\Tours\Data\TourData;
 use App\Http\Requests\Api\v1\Tours\UpdateTourRequest;
 use App\Http\Responses\Api\V1\Resources\TourResource;
 use App\Models\Identifiers\TourId;
+use App\OpenApi\Parameters\ListToursByTravelSlugParameters;
+use App\OpenApi\Parameters\TourUpdateParameters;
 use App\OpenApi\RequestBodies\Tours\UpdateTourRequestBody;
 use App\OpenApi\Responses\Tours\TourUpdatedResponse;
 use App\OpenApi\SecuritySchemes\TokenSecurityScheme;
@@ -28,6 +30,7 @@ class UpdateTourController extends Controller
         security: TokenSecurityScheme::class,
         method: 'PATCH',
     )]
+    #[OpenApi\Parameters(factory: TourUpdateParameters::class)]
     #[OpenApi\RequestBody(factory: UpdateTourRequestBody::class)]
     #[OpenApi\Response(factory: TourUpdatedResponse::class)]
     public function __invoke(

@@ -6,7 +6,7 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Vyuldashev\LaravelOpenApi\Factories\ParametersFactory;
 
-class ListToursBySlugParameters extends ParametersFactory
+class TravelUpdateParameters extends ParametersFactory
 {
     /**
      * @return Parameter[]
@@ -14,9 +14,9 @@ class ListToursBySlugParameters extends ParametersFactory
     public function build(): array
     {
         return [
-            Parameter::query()
-                ->name('tour')
-                ->description('The slug assigned to the tour')
+            Parameter::path()
+                ->name('travelId')
+                ->description('Travel identifier')
                 ->required()
                 ->schema(Schema::string()),
         ];
