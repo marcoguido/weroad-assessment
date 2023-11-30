@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')
     ->prefix('admin')
     ->group(function () {
         Route::prefix('/travels')->group(function () {
-            Route::get('/', ListTravelsController::class);
+            Route::get('/', [ListTravelsController::class, 'asAdministrator']);
             Route::post('/', CreateTravelController::class);
             Route::patch('/{travelId}', UpdateTravelController::class);
             Route::get('/{travelId}/tours', [ListToursController::class, 'byTravelId']);
@@ -41,6 +41,6 @@ Route::middleware('auth:sanctum')
 
 Route::prefix('public')
     ->group(function () {
-        Route::get('/travels', ListTravelsController::class);
+        Route::get('/travels', [ListTravelsController::class, 'publiclyAvailable']);
         Route::get('/travels/{travel}/tours', [ListToursController::class, 'byTravelSlug']);
     });
