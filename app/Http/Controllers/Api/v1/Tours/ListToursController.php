@@ -7,8 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Responses\Api\V1\Resources\TourResource;
 use App\Models\Identifiers\TravelId;
 use App\Models\Travel;
+use App\OpenApi\Parameters\ListToursByIdParameters;
+use App\OpenApi\Parameters\ListToursBySlugParameters;
+use App\OpenApi\Responses\Tours\ListToursResponse;
+use App\OpenApi\SecuritySchemes\TokenSecurityScheme;
 use Illuminate\Http\JsonResponse;
+use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 
+#[OpenApi\PathItem]
 class ListToursController extends Controller
 {
     public function __construct(
@@ -16,12 +22,34 @@ class ListToursController extends Controller
     ) {
     }
 
+    /**
+     * Admin-only API to fetch all tours by their parent travel
+     */
+    #[OpenApi\Operation(
+        tags: ['Tour'],
+        security: TokenSecurityScheme::class,
+        method: 'GET',
+    )]
+    #[OpenApi\Parameters(factory: ListToursByIdParameters::class)]
+    #[OpenApi\Response(
+        factory: ListToursResponse::class,
+        statusCode: JsonResponse::HTTP_OK,
+    )]
     public function byTravelId(TravelId $travelId): JsonResponse
     {
         return $this->getTours($travelId);
     }
 
-    public function byTravelSlug(Travel $travel, GetPaginatedTravelTours $fetchAction): JsonResponse
+    /**
+     * Public API to fetch all public tours associated to given travel
+     */
+    #[OpenApi\Operation(
+        tags: ['Tour'],
+        method: 'GET',
+    )]
+    #[OpenApi\Parameters(factory: ListToursBySlugParameters::class)]
+    #[OpenApi\Response(factory: ListToursResponse::class)]
+    public function byTravelSlug(Travel $travel): JsonResponse
     {
         return $this->getTours($travel->identifier);
     }
