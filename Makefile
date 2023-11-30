@@ -15,7 +15,7 @@ build:
            -v .:/var/www/html \
            -w /var/www/html \
            serversideup/php:8.2-cli \
-           composer install --ignore-platform-reqs \
+           composer install \
            && php artisan key:generate \
            && composer generate-api-docs
 	@docker compose \
