@@ -40,9 +40,10 @@ class TravelInputSchema extends TravelSchema implements Reusable
                 ->minimum(0)
                 ->nullable(false)
                 ->readOnly(),
-            Schema::array('moods') // FIXME, non accurate structure
+            TravelMoodsSchema::ref('moods')
                 ->description('A key-value object whose key is a mood and the value is a number representing the "mood amount" for the travel')
                 ->nullable(false)
+                ->minimum(1)
                 ->required(),
         ];
     }
