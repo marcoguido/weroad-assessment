@@ -44,6 +44,13 @@ run-tinker:
 		-f docker/docker-compose.$(APP_ENV).yml \
 		exec php bash -ci 'php artisan tinker'
 
+# Runs Laravel Pint to properly format the code
+sources-cleanup:
+	@docker compose \
+		-f docker/docker-compose.yml \
+		-f docker/docker-compose.$(APP_ENV).yml \
+		exec php bash -ci 'vendor/bin/pint'
+
 # Updates all composer dependencies
 do-composer-update:
 	@docker compose \
