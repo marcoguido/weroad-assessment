@@ -14,10 +14,11 @@
 ## Setup
 
 1. Clone the repository and open a terminal window pointing to the cloned project
-2. Pull all `composer` dependencies, create Docker containers and API documentation by running `make`
-3. Start the application either by running `make up` or `make up-d` (Docker will run as daemon with this one)
-4. Setup database structure and install default data by running `make run-fresh-migrations`
-5. Open a new browser window and head to `http://localhost`, you'll be greeted by a default Laravel window
+2. Clone the `.env.example` file to a new `.env` file
+3. Pull all `composer` dependencies, create Docker containers and API documentation by running `make`
+4. Start the application either by running `make up` or `make up-d` (Docker will run as daemon with this one)
+5. Setup database structure and install default data by running `make run-fresh-migrations`
+6. Open a new browser window and head to `http://localhost`, you'll be greeted by a default Laravel window
 
 ## Utils
 
