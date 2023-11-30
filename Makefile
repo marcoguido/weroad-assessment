@@ -16,7 +16,8 @@ build:
            -w /var/www/html \
            serversideup/php:8.2-cli \
            composer install --ignore-platform-reqs \
-           && php artisan key:generate
+           && php artisan key:generate \
+           && composer generate-api-docs
 	@docker compose \
     		-f docker/docker-compose.yml \
     		-f docker/docker-compose.$(APP_ENV).yml \

@@ -30,4 +30,6 @@
 5. To create a new user, run `make admin-user` and follow the prompts
 6. If you need to access the database without the hassle of configuring a local client, there is an instance
    of [PhpMyAdmin](http://localhost:8081) running. Login credentials are `root` as username and an empty password.
-7. Take a look at `Makefile` targets for other useful commands and routines
+7. Environment build step generates also API documentation. If something goes wrong or the file needs an update, run
+   either `make api-docs` (when running CLI from host machine) or `composer generate-api-docs` commands
+8. Take a look at `Makefile` targets for other useful commands and routines
