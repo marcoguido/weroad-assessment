@@ -7,7 +7,6 @@ use App\Http\Controllers\Api\v1\Tours\UpdateTourController;
 use App\Http\Controllers\Api\v1\Travels\CreateTravelController;
 use App\Http\Controllers\Api\v1\Travels\ListTravelsController;
 use App\Http\Controllers\Api\v1\Travels\UpdateTravelController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,5 +41,5 @@ Route::middleware('auth:sanctum')
 Route::prefix('public')
     ->group(function () {
         Route::get('/travels', [ListTravelsController::class, 'publiclyAvailable']);
-        Route::get('/travels/{travel}/tours', [ListToursController::class, 'byTravelSlug']);
+        Route::get('/travels/{travel:slug}/tours', [ListToursController::class, 'byTravelSlug']);
     });
