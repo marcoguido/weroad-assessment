@@ -7,11 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Responses\Api\V1\Resources\TourResource;
 use App\Models\Identifiers\TravelId;
 use App\Models\Travel;
-use App\OpenApi\Parameters\ListToursByIdParameters;
-use App\OpenApi\Parameters\ListToursBySlugParameters;
+use App\OpenApi\Parameters\ListToursByTravelIdParameters;
+use App\OpenApi\Parameters\ListToursByTravelSlugParameters;
 use App\OpenApi\Responses\Tours\ListToursResponse;
 use App\OpenApi\SecuritySchemes\TokenSecurityScheme;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 
 #[OpenApi\PathItem]
@@ -30,7 +31,7 @@ class ListToursController extends Controller
         security: TokenSecurityScheme::class,
         method: 'GET',
     )]
-    #[OpenApi\Parameters(factory: ListToursByIdParameters::class)]
+    #[OpenApi\Parameters(factory: ListToursByTravelIdParameters::class)]
     #[OpenApi\Response(
         factory: ListToursResponse::class,
         statusCode: JsonResponse::HTTP_OK,
@@ -47,7 +48,7 @@ class ListToursController extends Controller
         tags: ['Tour'],
         method: 'GET',
     )]
-    #[OpenApi\Parameters(factory: ListToursBySlugParameters::class)]
+    #[OpenApi\Parameters(factory: ListToursByTravelSlugParameters::class)]
     #[OpenApi\Response(factory: ListToursResponse::class)]
     public function byTravelSlug(Travel $travel): JsonResponse
     {
@@ -56,7 +57,12 @@ class ListToursController extends Controller
 
     private function getTours(TravelId $travelId): JsonResponse
     {
-        $tours = $this->action->execute($travelId);
+        // Forcing empty results when no user is logged and tries
+        // to fetch tours belonging to private travel
+        $tours = $this->action->execute(
+            travelId: $travelId,
+            publicTravelToursOnly: ! Auth::check(),
+        );
 
         return new JsonResponse(
             data: TourResource::collection($tours),
