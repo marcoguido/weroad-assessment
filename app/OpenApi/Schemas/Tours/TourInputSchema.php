@@ -19,6 +19,10 @@ class TourInputSchema extends TourSchema implements Reusable
                 ->maxLength(36)
                 ->nullable(false)
                 ->required(),
+            Schema::string('name')
+                ->maxLength(255)
+                ->nullable(false)
+                ->required(),
             Schema::string('startingDate')
                 ->format(Schema::FORMAT_DATE)
                 ->nullable(false)
@@ -33,5 +37,4 @@ class TourInputSchema extends TourSchema implements Reusable
                 ->required(),
         ];
     }
-
 }
