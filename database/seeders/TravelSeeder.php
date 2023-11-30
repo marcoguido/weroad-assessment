@@ -16,9 +16,9 @@ class TravelSeeder extends Seeder
      */
     public function run(): void
     {
-        $travelsAmount = rand(min: 5, max: 20);
+        $travelsAmount = rand(min: 20, max: 100);
         for ($travelIndex = 0; $travelIndex < $travelsAmount; $travelIndex++) {
-            $toursAmount = rand(min: 1, max: 10);
+            $toursAmount = rand(min: 5, max: 20);
             Travel::factory()
                 ->has(Tour::factory()->count($toursAmount))
                 ->create();
