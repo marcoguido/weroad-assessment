@@ -15,7 +15,7 @@ class StoreTravel
     public function execute(TravelData $data): Travel
     {
         $travelModel = $this->model->newInstance(
-            $data->toArray()
+            $data->toArray(),
         );
         $travelModel->save();
 

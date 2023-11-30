@@ -27,8 +27,8 @@ class LoginResponse extends ResponseFactory implements Reusable
                         Schema::string('expires')
                             ->description('When the token will expire')
                             ->format(Schema::FORMAT_DATE_TIME),
-                    )
-                )
+                    ),
+                ),
             );
     }
 }

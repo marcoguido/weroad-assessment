@@ -19,8 +19,8 @@ use Spatie\Sluggable\SlugOptions;
  * @property string $slug
  * @property string $name
  * @property string $description
- * @property integer $numberOfDays
- * @property-read integer $numberOfNights
+ * @property int $numberOfDays
+ * @property-read int $numberOfNights
  * @property Collection<integer, string> $moods
  * @property Carbon $createdAt
  * @property Carbon $updatedAt
@@ -33,6 +33,7 @@ class Travel extends Model
     use HasUuids;
 
     const CREATED_AT = 'createdAt';
+
     const UPDATED_AT = 'updatedAt';
 
     protected $table = 'travels';
@@ -49,6 +50,7 @@ class Travel extends Model
         'numberOfDays',
         'moods',
     ];
+
     /**
      * @var array<string, string>
      */
@@ -76,7 +78,7 @@ class Travel extends Model
     /**
      * Defines the options for generating travel slug
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')

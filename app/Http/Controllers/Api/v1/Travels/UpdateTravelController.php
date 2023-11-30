@@ -35,9 +35,8 @@ class UpdateTravelController extends Controller
     public function __invoke(
         TravelId $travelId,
         UpdateTravelRequest $request,
-        UpdateTravel $updateAction
-    ): JsonResponse
-    {
+        UpdateTravel $updateAction,
+    ): JsonResponse {
         /** @var TravelData $travelData */
         $travelData = $request->getData();
         $travel = $updateAction->execute($travelId, $travelData);

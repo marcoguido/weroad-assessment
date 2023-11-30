@@ -23,7 +23,7 @@ class TravelFactory extends Factory
             'description' => $this->faker->realText(),
             'numberOfDays' => $this->faker->numberBetween(1, 20),
             'moods' => $this->makeRandomMoods(
-                $this->faker->numberBetween(1, 10)
+                $this->faker->numberBetween(1, 10),
             ),
         ];
     }
@@ -31,7 +31,7 @@ class TravelFactory extends Factory
     private function makeRandomMoods(int $amount): array
     {
         $moods = [];
-        for ($moodIndex = 0 ; $moodIndex < $amount ; $moodIndex++) {
+        for ($moodIndex = 0; $moodIndex < $amount; $moodIndex++) {
             // Ensure no mood is generated twice
             do {
                 $moodName = $this->faker->word();

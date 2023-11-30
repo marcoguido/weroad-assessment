@@ -28,13 +28,13 @@ abstract class AbstractToursListingParameters extends ParametersFactory
                 ->name('filter[dateFrom]')
                 ->description('Filter all tours whose starting date comes after filter value')
                 ->schema(
-                    Schema::string()->format(Schema::FORMAT_DATE)
+                    Schema::string()->format(Schema::FORMAT_DATE),
                 ),
             Parameter::query()
                 ->name('filter[dateTo]')
                 ->description('Filter all tours whose ending date is **up to** filter value')
                 ->schema(
-                    Schema::string()->format(Schema::FORMAT_DATE)
+                    Schema::string()->format(Schema::FORMAT_DATE),
                 ),
             // Sorting
             Parameter::query()

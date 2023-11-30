@@ -3,7 +3,6 @@
 namespace App\OpenApi\Responses\Travels;
 
 use Illuminate\Http\JsonResponse;
-use Vyuldashev\LaravelOpenApi\Contracts\Reusable;
 
 class TravelUpdatedResponse extends TravelManipulationResponse
 {
@@ -14,6 +13,6 @@ class TravelUpdatedResponse extends TravelManipulationResponse
 
     public function getDescription(): string
     {
-        return "Travel successfully updated";
+        return 'Travel successfully updated';
     }
 }

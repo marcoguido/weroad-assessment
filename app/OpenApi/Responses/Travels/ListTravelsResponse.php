@@ -4,7 +4,6 @@ namespace App\OpenApi\Responses\Travels;
 
 use App\OpenApi\Schemas\Pagination\PaginationLinksSchema;
 use App\OpenApi\Schemas\Pagination\PaginationMetaSchema;
-use App\OpenApi\Schemas\Tours\TourOutputSchema;
 use App\OpenApi\Schemas\Travels\TravelOutputSchema;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\MediaType;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;

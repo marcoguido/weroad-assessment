@@ -6,6 +6,7 @@ use App\Actions\User\FindUserByEmail;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Console\Command;
+
 use function Laravel\Prompts\password;
 use function Laravel\Prompts\text;
 
@@ -47,7 +48,7 @@ class CreateNewAdminUser extends Command
                 Role::editor()->id,
             ]);
 
-        $this->info("User successfully created!");
+        $this->info('User successfully created!');
 
         $this->getOutput()
             ->horizontalTable(
@@ -73,18 +74,18 @@ class CreateNewAdminUser extends Command
         }
 
         if (empty($providedName)) {
-            $this->warn("No name was provided.");
+            $this->warn('No name was provided.');
         } else {
-            $this->error("Provided name is not valid, try again");
+            $this->error('Provided name is not valid, try again');
         }
 
         return text(
             label: "What is user's full name?",
             required: true,
-            validate: fn(string $value) => match (true) {
+            validate: fn (string $value) => match (true) {
                 strlen($value) < 3 => 'The name must be at least 3 characters.',
                 strlen($value) > 255 => 'The name must not exceed 255 characters.',
-                default => null
+                default => null,
             },
         );
     }
@@ -95,17 +96,17 @@ class CreateNewAdminUser extends Command
         $existingUserWithGivenEmail = (new FindUserByEmail())->execute($providedEmail);
 
         if (
-            null === $existingUserWithGivenEmail
-            && false !== filter_var($providedEmail, FILTER_VALIDATE_EMAIL)
+            $existingUserWithGivenEmail === null
+            && filter_var($providedEmail, FILTER_VALIDATE_EMAIL) !== false
             && strlen($providedEmail) < 255
         ) {
             return $providedEmail;
         }
 
         if (empty($providedEmail)) {
-            $this->warn("No email was provided.");
+            $this->warn('No email was provided.');
         } else {
-            $this->error("Provided email is not valid, try again");
+            $this->error('Provided email is not valid, try again');
         }
 
         return text(
@@ -114,13 +115,13 @@ class CreateNewAdminUser extends Command
             validate: function (string $value) {
                 $existingUser = (new FindUserByEmail())->execute($value);
 
-                if (null !== $existingUser) {
+                if ($existingUser !== null) {
                     return 'This email address is already taken, try again';
                 }
 
                 return match (true) {
-                    (false === filter_var($value, FILTER_VALIDATE_EMAIL)) => "This email address looks invalid, check it out",
-                    strlen($value) > 255 => "The email must not exceed 255 characters.",
+                    (filter_var($value, FILTER_VALIDATE_EMAIL) === false) => 'This email address looks invalid, check it out',
+                    strlen($value) > 255 => 'The email must not exceed 255 characters.',
                     default => null,
                 };
             },
@@ -132,11 +133,11 @@ class CreateNewAdminUser extends Command
         return password(
             label: "What will user's password be?",
             required: true,
-            validate: fn(string $value) => match (true) {
-                strlen($value) < 8 => "The password must be at least 8 characters long.",
-                default => null
+            validate: fn (string $value) => match (true) {
+                strlen($value) < 8 => 'The password must be at least 8 characters long.',
+                default => null,
             },
-            hint: 'Password should be at least 8 characters long'
+            hint: 'Password should be at least 8 characters long',
         );
     }
 }

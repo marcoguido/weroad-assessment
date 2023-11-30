@@ -2,7 +2,6 @@
 
 namespace App\OpenApi\Schemas\Travels;
 
-use App\OpenApi\Schemas\Travels\TravelSchema;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Vyuldashev\LaravelOpenApi\Contracts\Reusable;
 

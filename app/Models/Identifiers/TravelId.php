@@ -9,5 +9,4 @@ use App\Models\Travel;
  */
 class TravelId extends StringIdentifier
 {
-
 }

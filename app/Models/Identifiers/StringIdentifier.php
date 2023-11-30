@@ -13,7 +13,7 @@ use Stringable;
 /**
  * @template T of Model
  */
-abstract class StringIdentifier implements IdentifierContract, Stringable, Castable
+abstract class StringIdentifier implements Castable, IdentifierContract, Stringable
 {
     public function __construct(
         public readonly string $value,
@@ -36,7 +36,7 @@ abstract class StringIdentifier implements IdentifierContract, Stringable, Casta
         {
             public function cast(DataProperty $property, mixed $value, array $context): mixed
             {
-                if (null === $value) {
+                if ($value === null) {
                     return Uncastable::create();
                 }
 

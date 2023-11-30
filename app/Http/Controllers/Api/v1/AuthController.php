@@ -33,7 +33,7 @@ class AuthController extends Controller
     public function __invoke(FindUserByEmail $userFinder, LoginRequest $request): JsonResponse
     {
         if (! Auth::attempt($request->getCredentials())) {
-            throw new AuthorizationException("Either username or password are invalid");
+            throw new AuthorizationException('Either username or password are invalid');
         }
 
         $apiToken = $userFinder->execute(
@@ -45,7 +45,7 @@ class AuthController extends Controller
             data: [
                 'name' => $apiToken->accessToken->name,
                 'token' => $apiToken->plainTextToken,
-                'expires' => $apiToken->accessToken->expires_at
+                'expires' => $apiToken->accessToken->expires_at,
             ],
             status: JsonResponse::HTTP_CREATED,
         );

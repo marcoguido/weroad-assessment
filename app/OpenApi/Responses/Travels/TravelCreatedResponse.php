@@ -2,7 +2,6 @@
 
 namespace App\OpenApi\Responses\Travels;
 
-use App\OpenApi\Responses\Travels\TravelManipulationResponse;
 use Illuminate\Http\JsonResponse;
 
 class TravelCreatedResponse extends TravelManipulationResponse
@@ -14,6 +13,6 @@ class TravelCreatedResponse extends TravelManipulationResponse
 
     public function getDescription(): string
     {
-        return "Travel successfully created";
+        return 'Travel successfully created';
     }
 }

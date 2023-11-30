@@ -17,7 +17,7 @@ use Illuminate\Support\Carbon;
  * @property string $name
  * @property Carbon $startingDate
  * @property Carbon $endingDate
- * @property integer $price
+ * @property int $price
  * @property float $formattedPrice
  * @property Carbon $createdAt
  * @property Carbon $updatedAt
@@ -29,7 +29,9 @@ class Tour extends Model
     use HasUuids;
 
     const DATE_FORMAT = 'Y-m-d';
+
     const CREATED_AT = 'createdAt';
+
     const UPDATED_AT = 'updatedAt';
 
     /**
@@ -59,7 +61,8 @@ class Tour extends Model
      * Relationship definition to get the travel associated to
      * current tour instance
      */
-    public function travel(): BelongsTo {
+    public function travel(): BelongsTo
+    {
         return $this->belongsTo(
             related: Travel::class,
             foreignKey: 'travelId',

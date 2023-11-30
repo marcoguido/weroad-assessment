@@ -12,10 +12,10 @@ class DoLoginRequestBody extends RequestBodyFactory
     public function build(): RequestBody
     {
         return RequestBody::create()
-            ->description("Login request payload")
+            ->description('Login request payload')
             ->required()
             ->content(
-                MediaType::json()->schema(LoginSchema::ref())
+                MediaType::json()->schema(LoginSchema::ref()),
             );
     }
 }

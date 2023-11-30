@@ -17,6 +17,7 @@ use Illuminate\Support\Carbon;
 class Role extends Model
 {
     const CREATED_AT = 'createdAt';
+
     const UPDATED_AT = 'updatedAt';
 
     use HasFactory;

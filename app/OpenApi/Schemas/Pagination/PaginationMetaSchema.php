@@ -16,6 +16,7 @@ class PaginationMetaSchema extends SchemaFactory implements Reusable
 {
     /**
      * @return AllOf|OneOf|AnyOf|Not|Schema
+     *
      * @throws InvalidArgumentException
      */
     public function build(): SchemaContract

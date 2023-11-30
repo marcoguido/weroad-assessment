@@ -8,7 +8,6 @@ use App\Http\Requests\Api\v1\Tours\Data\TourData;
 use App\Http\Requests\Api\v1\Tours\UpdateTourRequest;
 use App\Http\Responses\Api\V1\Resources\TourResource;
 use App\Models\Identifiers\TourId;
-use App\OpenApi\Parameters\ListToursByTravelSlugParameters;
 use App\OpenApi\Parameters\TourUpdateParameters;
 use App\OpenApi\RequestBodies\Tours\UpdateTourRequestBody;
 use App\OpenApi\Responses\Tours\TourUpdatedResponse;
@@ -36,9 +35,8 @@ class UpdateTourController extends Controller
     public function __invoke(
         TourId $tourId,
         UpdateTourRequest $request,
-        UpdateTour $updateAction
-    ): JsonResponse
-    {
+        UpdateTour $updateAction,
+    ): JsonResponse {
         /** @var TourData $tourData */
         $tourData = $request->getData();
         $tour = $updateAction->execute($tourId, $tourData);

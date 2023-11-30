@@ -4,10 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Tour;
 use Carbon\CarbonImmutable;
-use DateTime;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
 
 /**
  * @extends Factory<Tour>
@@ -18,12 +16,13 @@ class TourFactory extends Factory
      * Define the model's default state.
      *
      * @return array<string, mixed>
+     *
      * @throws Exception
      */
     public function definition(): array
     {
         $tourStartingDate = CarbonImmutable::parse(
-            $this->faker->dateTimeBetween(startDate: '-2 years', endDate: '+2 years')
+            $this->faker->dateTimeBetween(startDate: '-2 years', endDate: '+2 years'),
         );
         $tourEndingDate = $tourStartingDate->add(
             unit: $this->faker->randomElement(['day', 'week']),

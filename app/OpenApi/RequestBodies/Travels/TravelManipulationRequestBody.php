@@ -11,10 +11,9 @@ abstract class TravelManipulationRequestBody extends RequestBodyFactory
 {
     /**
      * Request body description
-     *
-     * @return string
      */
-    public abstract function getDescription(): string;
+    abstract public function getDescription(): string;
+
     public function build(): RequestBody
     {
         return RequestBody::create()

@@ -28,5 +28,4 @@ class TourOutputSchema extends TourInputSchema implements Reusable
                 ->default(null),
         ];
     }
-
 }

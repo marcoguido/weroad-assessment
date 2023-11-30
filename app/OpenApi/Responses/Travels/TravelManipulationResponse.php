@@ -9,8 +9,9 @@ use Vyuldashev\LaravelOpenApi\Factories\ResponseFactory;
 
 abstract class TravelManipulationResponse extends ResponseFactory
 {
-    public abstract function getStatusCode(): int;
-    public abstract function getDescription(): string;
+    abstract public function getStatusCode(): int;
+
+    abstract public function getDescription(): string;
 
     public function build(): Response
     {

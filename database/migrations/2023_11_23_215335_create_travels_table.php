@@ -20,8 +20,8 @@ return new class extends Migration
             $table->longText('description');
             $table->unsignedInteger('numberOfDays');
             $table->unsignedInteger('numberOfNights')
-                ->virtualAs("numberOfDays - 1");
-            $table->json('moods')->default("[]");
+                ->virtualAs('numberOfDays - 1');
+            $table->json('moods')->default('[]');
             $table->timestamp(Travel::CREATED_AT)->nullable();
             $table->timestamp(Travel::UPDATED_AT)->nullable();
         });

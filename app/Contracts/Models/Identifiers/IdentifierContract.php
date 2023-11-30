@@ -6,9 +6,6 @@ interface IdentifierContract
 {
     /**
      * Crafts a new identifier value object
-     *
-     * @param string $value
-     * @return static
      */
     public static function make(string $value): static;
 }

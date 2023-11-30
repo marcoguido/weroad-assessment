@@ -24,6 +24,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     const CREATED_AT = 'createdAt';
+
     const UPDATED_AT = 'updatedAt';
 
     use HasApiTokens;
@@ -70,6 +71,7 @@ class User extends Authenticatable
     /**
      * Helper method to check whether an user has
      * administrative grants.
+     *
      * @see UserRole
      */
     public function isAdmin(): bool
@@ -80,6 +82,7 @@ class User extends Authenticatable
     /**
      * Helper method to check whether an user has
      * entity editing capabilities.
+     *
      * @see UserRole
      */
     public function isEditor(): bool

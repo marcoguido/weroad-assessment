@@ -17,14 +17,14 @@ class GetPaginatedTravels
     /**
      * Retrieves all available Travel models
      *
-     * @param bool $onlyPublic Whether to retrieve all Travels or only publicly available ones
+     * @param  bool  $onlyPublic Whether to retrieve all Travels or only publicly available ones
      * @return LengthAwarePaginator<Travel>
      */
     public function execute(bool $onlyPublic = false): LengthAwarePaginator
     {
         return QueryBuilder::for($this->model)
             ->when(
-                value: (true === $onlyPublic),
+                value: ($onlyPublic === true),
                 callback: fn (Builder $query) => $query
                     ->where('isPublic', '=', true),
             )

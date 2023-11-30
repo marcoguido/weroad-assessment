@@ -9,5 +9,4 @@ use App\Models\Tour;
  */
 class TourId extends StringIdentifier
 {
-
 }

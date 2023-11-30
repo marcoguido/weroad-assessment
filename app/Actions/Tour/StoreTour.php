@@ -15,7 +15,7 @@ class StoreTour
     public function execute(TourData $data): Tour
     {
         $tourModel = $this->model->newInstance(
-            $data->toArray()
+            $data->toArray(),
         );
         $tourModel->save();
 

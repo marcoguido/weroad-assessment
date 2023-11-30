@@ -9,10 +9,8 @@ abstract class AbstractPriceFilter implements Filter
 {
     /**
      * Returns the operator of the specific filter implementation
-     *
-     * @return string
      */
-    protected abstract function getFilterOperator(): string;
+    abstract protected function getFilterOperator(): string;
 
     public function __invoke(Builder $query, $value, string $property)
     {

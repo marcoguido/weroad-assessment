@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Constants\UserRole;
-use App\Models\Role;
 use App\Models\Tour;
 use App\Models\Travel;
 use Illuminate\Database\Seeder;
@@ -19,7 +17,7 @@ class TravelSeeder extends Seeder
     public function run(): void
     {
         $travelsAmount = rand(min: 5, max: 20);
-        for ($travelIndex = 0 ; $travelIndex < $travelsAmount ; $travelIndex ++) {
+        for ($travelIndex = 0; $travelIndex < $travelsAmount; $travelIndex++) {
             $toursAmount = rand(min: 1, max: 10);
             Travel::factory()
                 ->has(Tour::factory()->count($toursAmount))

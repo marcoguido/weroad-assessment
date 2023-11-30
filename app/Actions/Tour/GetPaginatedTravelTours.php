@@ -10,7 +10,6 @@ use App\Models\Identifiers\TravelId;
 use App\Models\Tour;
 use App\Models\Travel;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;

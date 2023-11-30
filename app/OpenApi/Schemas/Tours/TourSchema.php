@@ -9,7 +9,6 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\AnyOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Not;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\OneOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
-use Vyuldashev\LaravelOpenApi\Contracts\Reusable;
 use Vyuldashev\LaravelOpenApi\Factories\SchemaFactory;
 
 abstract class TourSchema extends SchemaFactory
@@ -17,12 +16,13 @@ abstract class TourSchema extends SchemaFactory
     /**
      * @return Schema[]
      */
-    public abstract function getObjectProperties(): array;
+    abstract public function getObjectProperties(): array;
 
-    public abstract function getObjectId(): string;
+    abstract public function getObjectId(): string;
 
     /**
      * @return AllOf|OneOf|AnyOf|Not|Schema
+     *
      * @throws InvalidArgumentException
      */
     public function build(): SchemaContract
