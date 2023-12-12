@@ -1,5 +1,9 @@
 # :toolbox: Libraries
 
+## Authentication
+
+- [Laravel Sanctum](https://laravel.com/docs/10.x/sanctum): `laravel/sanctum`
+
 ## Code support
 
 - [Better CLI interaction](https://laravel.com/docs/10.x/prompts): `laravel/prompts`
@@ -8,6 +12,7 @@
 - [Automatic slug management](https://github.com/spatie/laravel-sluggable): `spatie/laravel-sluggable`
 - [Request filtering and sorting helper](https://spatie.be/docs/laravel-query-builder): `spatie/laravel-query-builder`
 - [JsonApi-compliant pagination helper](https://github.com/spatie/laravel-json-api-paginate): `spatie/laravel-json-api-paginate`
+- [Pest testing tool](https://github.com/pestphp/pest): `pestphp/pest`
 
 # Code style
 

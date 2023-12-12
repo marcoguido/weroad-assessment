@@ -65,6 +65,13 @@ api-docs:
 		-f docker/docker-compose.$(APP_ENV).yml \
 		exec php bash -ci 'composer generate-api-docs'
 
+# Runs test suite against **feature** tests
+run-feature-tests:
+	@docker compose \
+		-f docker/docker-compose.yml \
+		-f docker/docker-compose.$(APP_ENV).yml \
+		exec php bash -ci './vendor/bin/pest'
+
 # Generates a new user with administrative privileges
 admin-user:
 	@docker compose \
