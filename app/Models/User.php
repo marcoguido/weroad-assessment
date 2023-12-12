@@ -96,7 +96,7 @@ class User extends Authenticatable
             return $this->roles
                 ->first(
                     fn (Role $roleModel) => $roleModel->name === $role->value,
-                );
+                ) !== null;
         }
 
         return $this
