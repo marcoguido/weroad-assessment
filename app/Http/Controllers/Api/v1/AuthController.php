@@ -9,6 +9,7 @@ use App\OpenApi\RequestBodies\DoLoginRequestBody;
 use App\OpenApi\Responses\LoginResponse;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
@@ -39,7 +40,13 @@ class AuthController extends Controller
         $apiToken = $userFinder->execute(
             email: $request->getEmail(),
             failIfNotFound: true,
-        )->createToken(Str::random());
+        )
+            ->createToken(
+                name: Str::random(),
+                expiresAt: Carbon::now()->addMinutes(
+                    config('sanctum.expiration'),
+                ),
+            );
 
         return new JsonResponse(
             data: [
