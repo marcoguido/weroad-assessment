@@ -70,7 +70,7 @@ it(
 
         // Check for response details
         $authenticationResponse
-            ->assertForbidden()
+            ->assertUnauthorized()
             ->assertHeader('Content-Type', 'application/json')
             ->assertJsonIsObject();
     },
