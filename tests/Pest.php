@@ -14,6 +14,8 @@
 uses(
     Tests\TestCase::class,
     Illuminate\Foundation\Testing\RefreshDatabase::class,
+    \Tests\Feature\Concerns\CreatesAdministrators::class,
+    \Tests\Feature\Concerns\CreatesEditors::class,
 )->in('Feature');
 
 /*
