@@ -27,6 +27,8 @@ class User extends Authenticatable
 
     const UPDATED_AT = 'updatedAt';
 
+    const MINIMUM_PASSWORD_LENGTH = 8;
+
     use HasApiTokens;
     use HasFactory;
     use HasUuids;
