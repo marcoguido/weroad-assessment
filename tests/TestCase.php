@@ -12,4 +12,6 @@ abstract class TestCase extends BaseTestCase
     // Automatically invokes development seeder
     // when refreshing database
     protected string $seeder = DevelopmentSeeder::class;
+
+    protected static string $PUBLIC_TRAVEL_INDEX_API = '/api/public/travels';
 }
