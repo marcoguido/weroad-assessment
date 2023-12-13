@@ -31,6 +31,7 @@ class GetPaginatedTravelTours
      */
     public function execute(TravelId $travelId, bool $publicTravelToursOnly = false): LengthAwarePaginator
     {
+        // Ensure travel exists: otherwise throw a 404 error
         /** @var Travel $travel */
         $travel = $this->travelModel::query()->findOrFail($travelId);
 
