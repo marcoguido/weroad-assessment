@@ -9,7 +9,7 @@ use Illuminate\Translation\PotentiallyTranslatedString;
 class MoodFormatRule implements ValidationRule
 {
     /**
-     * Run the validation rule.
+     * Verifies that Travel moods are properly formatted.
      *
      * @param  Closure(string): PotentiallyTranslatedString  $fail
      */

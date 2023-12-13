@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Concerns\HasIdentifier;
 use App\Models\Identifiers\TourId;
+use Database\Factories\TourFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
+ * @property TourId $identifier
  * @property string $travelId
  * @property string $name
  * @property Carbon $startingDate
@@ -21,6 +23,8 @@ use Illuminate\Support\Carbon;
  * @property float $formattedPrice
  * @property Carbon $createdAt
  * @property Carbon $updatedAt
+ *
+ * @method static TourFactory factory($count = null, $state = [])
  */
 class Tour extends Model
 {

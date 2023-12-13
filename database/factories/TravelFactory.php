@@ -30,6 +30,8 @@ class TravelFactory extends Factory
 
     /**
      * Generates a `public` travel
+     *
+     * @return Factory<Travel>
      */
     public function public(): Factory
     {
@@ -42,6 +44,8 @@ class TravelFactory extends Factory
 
     /**
      * Generates a `private` travel
+     *
+     * @return Factory<Travel>
      */
     public function private(): Factory
     {

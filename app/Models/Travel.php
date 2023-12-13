@@ -16,6 +16,7 @@ use Spatie\Sluggable\SlugOptions;
 
 /**
  * @property string $id
+ * @property TravelId $identifier
  * @property bool $isPublic
  * @property string $slug
  * @property string $name
@@ -25,7 +26,8 @@ use Spatie\Sluggable\SlugOptions;
  * @property Collection<integer, string> $moods
  * @property Carbon $createdAt
  * @property Carbon $updatedAt
- * @method static TravelFactory factory
+ *
+ * @method static TravelFactory factory($count = null, $state = [])
  */
 class Travel extends Model
 {

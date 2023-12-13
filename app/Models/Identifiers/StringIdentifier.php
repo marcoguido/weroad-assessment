@@ -15,11 +15,17 @@ use Stringable;
  */
 abstract class StringIdentifier implements Castable, IdentifierContract, Stringable
 {
+    /**
+     * @param  string  $value T identifier
+     */
     public function __construct(
         public readonly string $value,
     ) {
     }
 
+    /**
+     * @param  string  $value T identifier
+     */
     public static function make(string $value): static
     {
         return new static($value);
