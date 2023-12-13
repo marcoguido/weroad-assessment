@@ -29,7 +29,7 @@ uses(
 |
 */
 
-expect()->extend('toBeOne', function () {
+expect()->extend('toBeOneExtended', function () {
     return $this->toBe(1);
 });
 
