@@ -27,6 +27,22 @@ it(
 );
 
 it(
+    'test that non-authenticated users cannot create new travels',
+    function () {
+        $this
+            ->post(
+                uri: static::$PRIVATE_TRAVELS_API_PATH,
+                data: Travel::factory()->makeOne()->toArray(),
+                headers: [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ],
+            )
+            ->assertUnauthorized();
+    },
+);
+
+it(
     'test that a travel can be created',
     function () {
         $travelData = Travel::factory()->makeOne();
@@ -65,20 +81,78 @@ it(
     },
 );
 
-
 it(
-    'test that non-authenticated users cannot create new travels',
+    'test that a travel cannot be created if input data is not compliant',
     function () {
+        $travelData = Travel::factory()
+            ->makeOne()
+            ->toArray();
+        // Simulating a missing field
+        unset($travelData['moods']);
+
         $this
-            ->post(
+            ->actingAs($this->makeAdminUser())
+            ->postJson(
                 uri: static::$PRIVATE_TRAVELS_API_PATH,
-                data: Travel::factory()->makeOne()->toArray(),
+                data: $travelData,
                 headers: [
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
                 ],
             )
-            ->assertUnauthorized();
+            ->assertJsonValidationErrors(['moods']);
     },
 );
 
+it(
+    'test that a travel cannot be created if moods not compliant',
+    function () {
+        $travelData = Travel::factory()
+            ->makeOne()
+            ->toArray();
+
+        foreach (array_keys($travelData['moods']) as $moodName) {
+            // Valid values are *ONLY* numeric values
+            $travelData['moods'][$moodName] = fake()->word;
+        }
+
+        $this
+            ->actingAs($this->makeAdminUser())
+            ->postJson(
+                uri: static::$PRIVATE_TRAVELS_API_PATH,
+                data: $travelData,
+                headers: [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ],
+            )
+            ->assertJsonValidationErrors(['moods']);
+    },
+);
+
+it(
+    'test that a travel can be updated',
+    function () {
+        $travelData = Travel::factory()
+            ->createOne()
+            ->toArray();
+
+        // Update Travel information to be used as request payload
+        $travelData['description'] = 'A brand new description, WOW!';
+
+        $apiResponse = $this
+            ->actingAs($this->makeAdminUser())
+            ->patchJson(
+                uri: static::$PRIVATE_TRAVELS_API_PATH."/{$travelData['id']}",
+                data: $travelData,
+                headers: [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ],
+            )
+            ->assertAccepted();
+
+        expect($apiResponse->json())
+            ->description->toBe($travelData['description']);
+    },
+);
