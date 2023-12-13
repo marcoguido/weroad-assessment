@@ -3,6 +3,9 @@
 namespace App\Http\Responses\Api\V1\Resources;
 
 use App\Models\Tour;
+use DateTime;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
 
 class TourResource extends Data
@@ -14,6 +17,10 @@ class TourResource extends Data
         public readonly string $startingDate,
         public readonly string $endingDate,
         public readonly int $price,
+        #[WithCast(DateTimeInterfaceCast::class)]
+        public readonly DateTime $createdAt,
+        #[WithCast(DateTimeInterfaceCast::class)]
+        public readonly DateTime $updatedAt,
     ) {
     }
 
