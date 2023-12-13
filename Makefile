@@ -71,7 +71,7 @@ run-feature-tests:
 	@docker compose \
 		-f docker/docker-compose.yml \
 		-f docker/docker-compose.$(APP_ENV).yml \
-		exec php bash -ci './vendor/bin/pest'
+		exec php bash -ci 'composer test'
 
 # Generates a new user with administrative privileges
 admin-user:

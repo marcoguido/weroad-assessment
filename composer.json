@@ -59,6 +59,13 @@
         ],
         "generate-api-docs": [
             "@php artisan openapi:generate > public/openapi.json"
+        ],
+        "test": [
+            "@putenv APP_ENV=testing",
+            "@putenv LOG_CHANNEL=stderr",
+            "@putenv DB_DATABASE=testing",
+            "@putenv MAIL_MAILER=log",
+            "./vendor/bin/pest"
         ]
     },
     "extra": {
