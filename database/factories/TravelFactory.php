@@ -28,6 +28,30 @@ class TravelFactory extends Factory
         ];
     }
 
+    /**
+     * Generates a `public` travel
+     */
+    public function public(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'isPublic' => true,
+            ];
+        });
+    }
+
+    /**
+     * Generates a `private` travel
+     */
+    public function private(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'isPublic' => false,
+            ];
+        });
+    }
+
     private function makeRandomMoods(int $amount): array
     {
         $moods = [];
