@@ -5,6 +5,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Tests\Feature\Constants\RouteName;
 
 it(
     'test a user can successfully authenticate with right credentials',
@@ -14,7 +15,7 @@ it(
 
         // Try performing authentication
         $authenticationResponse = $this->postJson(
-            uri: 'api/login',
+            uri: route(RouteName::LOGIN->value),
             data: [
                 'email' => $userToBeLogged->email,
                 'password' => $userPassword,
@@ -57,7 +58,7 @@ it(
 
         // Try performing authentication with wrong password
         $authenticationResponse = $this->postJson(
-            uri: 'api/login',
+            uri: route(RouteName::LOGIN->value),
             data: [
                 'email' => $userToBeLogged->email,
                 'password' => $wrongUserPassword,

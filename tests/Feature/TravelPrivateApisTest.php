@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Travel;
+use Tests\Feature\Constants\RouteName;
 
 it(
     'test that all types of travel can be retrieved',
@@ -14,9 +15,12 @@ it(
         // unavailable
         $apiResponse = $this
             ->actingAs($this->makeAdminUser())
-            ->get(
-                static::$PRIVATE_TRAVELS_API_PATH.'?page[size]='.PHP_INT_MAX, // Asking for a *really* big result page
-            )
+            ->get(uri: route(
+                name: RouteName::PRIVATE_TRAVELS_INDEX->value,
+                parameters: [
+                    'page[size]' => PHP_INT_MAX, // Asking for a *really* big result page
+                ],
+            ))
             ->assertSuccessful()
             ->assertJsonIsObject();
 
@@ -30,8 +34,8 @@ it(
     'test that non-authenticated users cannot create new travels',
     function () {
         $this
-            ->post(
-                uri: static::$PRIVATE_TRAVELS_API_PATH,
+            ->postJson(
+                uri: route(RouteName::PRIVATE_TRAVELS_CREATE->value),
                 data: Travel::factory()->makeOne()->toArray(),
                 headers: [
                     'Accept' => 'application/json',
@@ -50,7 +54,7 @@ it(
         $apiResponse = $this
             ->actingAs($this->makeAdminUser())
             ->postJson(
-                uri: static::$PRIVATE_TRAVELS_API_PATH,
+                uri: route(RouteName::PRIVATE_TRAVELS_CREATE->value),
                 data: $travelData->toArray(),
                 headers: [
                     'Accept' => 'application/json',
@@ -93,7 +97,7 @@ it(
         $this
             ->actingAs($this->makeAdminUser())
             ->postJson(
-                uri: static::$PRIVATE_TRAVELS_API_PATH,
+                uri: route(RouteName::PRIVATE_TRAVELS_CREATE->value),
                 data: $travelData,
                 headers: [
                     'Accept' => 'application/json',
@@ -119,7 +123,7 @@ it(
         $this
             ->actingAs($this->makeAdminUser())
             ->postJson(
-                uri: static::$PRIVATE_TRAVELS_API_PATH,
+                uri: route(RouteName::PRIVATE_TRAVELS_CREATE->value),
                 data: $travelData,
                 headers: [
                     'Accept' => 'application/json',
@@ -133,17 +137,21 @@ it(
 it(
     'test that a travel can be updated',
     function () {
-        $travelData = Travel::factory()
-            ->createOne()
-            ->toArray();
+        $travel = Travel::factory()->createOne();
 
         // Update Travel information to be used as request payload
+        $travelData = $travel->toArray();
         $travelData['description'] = 'A brand new description, WOW!';
 
         $apiResponse = $this
             ->actingAs($this->makeAdminUser())
             ->patchJson(
-                uri: static::$PRIVATE_TRAVELS_API_PATH."/{$travelData['id']}",
+                uri: route(
+                    name: RouteName::PRIVATE_TRAVELS_UPDATE->value,
+                    parameters: [
+                        'travelId' => $travel->identifier,
+                    ],
+                ),
                 data: $travelData,
                 headers: [
                     'Accept' => 'application/json',

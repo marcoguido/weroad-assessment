@@ -1,12 +1,13 @@
 <?php
 
 use App\Models\Travel;
+use Tests\Feature\Constants\RouteName;
 
 it(
     'test that all public travels can be retrieved',
     function () {
         $apiResponse = $this
-            ->get(static::$PUBLIC_TRAVELS_API_PATH)
+            ->get(uri: route(RouteName::PUBLIC_TRAVELS_INDEX->value))
             ->assertSuccessful()
             ->assertJsonIsObject();
 
@@ -28,9 +29,12 @@ it(
         // in order to check that private ones are
         // unavailable
         $apiResponse = $this
-            ->get(
-                static::$PUBLIC_TRAVELS_API_PATH.'?page[size]='.PHP_INT_MAX, // Asking for a *really* big result page
-            )
+            ->get(uri: route(
+                name: RouteName::PUBLIC_TRAVELS_INDEX->value,
+                parameters: [
+                    'page[size]' => PHP_INT_MAX, // Asking for a *really* big result page
+                ],
+            ))
             ->assertSuccessful()
             ->assertJsonIsObject();
 

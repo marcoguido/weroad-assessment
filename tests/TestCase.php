@@ -13,10 +13,6 @@ abstract class TestCase extends BaseTestCase
     // when refreshing database
     protected string $seeder = DevelopmentSeeder::class;
 
-    protected static string $PUBLIC_TRAVELS_API_PATH = '/api/public/travels';
-
-    protected static string $PRIVATE_TRAVELS_API_PATH = '/api/admin/travels';
-
     public function __construct(string $name)
     {
         parent::__construct($name);
