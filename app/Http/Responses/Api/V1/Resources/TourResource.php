@@ -33,6 +33,8 @@ class TourResource extends Data
             $tour->startingDate->format(Tour::DATE_FORMAT),
             $tour->endingDate->format(Tour::DATE_FORMAT),
             $tour->price,
+            $tour->createdAt,
+            $tour->updatedAt,
         );
     }
 }
