@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', AuthController::class);
+Route::post('/login', AuthController::class)->name('login');
 
 Route::middleware('auth:sanctum')
     ->prefix('admin')
