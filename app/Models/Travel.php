@@ -26,6 +26,7 @@ use Spatie\Sluggable\SlugOptions;
  * @property Collection<integer, string> $moods
  * @property Carbon $createdAt
  * @property Carbon $updatedAt
+ * @property-read Collection<integer, Tour> $tours
  *
  * @method static TravelFactory factory($count = null, $state = [])
  */
