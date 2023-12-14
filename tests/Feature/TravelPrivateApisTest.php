@@ -18,7 +18,7 @@ it(
             ->get(uri: route(
                 name: RouteName::PRIVATE_TRAVELS_INDEX->value,
                 parameters: [
-                    'page[size]' => PHP_INT_MAX, // Asking for a *really* big result page
+                    'page[size]' => PHP_INT_MAX, // Manually bypass pagination
                 ],
             ))
             ->assertSuccessful()

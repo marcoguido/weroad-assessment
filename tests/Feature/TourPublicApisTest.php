@@ -19,7 +19,7 @@ it(
                     name: RouteName::PUBLIC_TRAVEL_TOURS_INDEX->value,
                     parameters: [
                         'travel' => $travel->slug,
-                        'page[size]' => PHP_INT_MAX, // Asking for a *really* big result page
+                        'page[size]' => PHP_INT_MAX, // Manually bypass pagination
                     ],
                 ),
             )
@@ -30,7 +30,6 @@ it(
             ->data->toBeArray()
             ->links->toBeArray()
             ->meta->toBeArray();
-
 
         $originalWsTours = $apiResponse->json('data');
         $wsToursSortedByDate = collect($apiResponse->json('data'))
@@ -61,7 +60,7 @@ it(
                     parameters: [
                         'travel' => $travel->slug,
                         'sort' => "{$sortingDirection}price",
-                        'page[size]' => PHP_INT_MAX, // Asking for a *really* big result page
+                        'page[size]' => PHP_INT_MAX, // Manually bypass pagination
                     ],
                 ),
             )
@@ -72,7 +71,6 @@ it(
             ->data->toBeArray()
             ->links->toBeArray()
             ->meta->toBeArray();
-
 
         $originalWsTours = $apiResponse->json('data');
         $wsToursSortedByDate = collect($apiResponse->json('data'))
@@ -108,7 +106,7 @@ it(
                     parameters: [
                         'travel' => $travel->slug,
                         "filter[$filterName]" => $randomTour->price,
-                        'page[size]' => PHP_INT_MAX, // Asking for a *really* big result page
+                        'page[size]' => PHP_INT_MAX, // Manually bypass pagination
                     ],
                 ),
             )
