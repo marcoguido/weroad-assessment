@@ -46,7 +46,7 @@ it(
 );
 
 it(
-    'test that all tours of a public travel can be retrieved and they can sorted by price',
+    'test that all tours of a public travel can be retrieved and be sorted by price',
     function (string $sortingDirection) {
         /** @var Travel $travel */
         $travel = Travel::query()
