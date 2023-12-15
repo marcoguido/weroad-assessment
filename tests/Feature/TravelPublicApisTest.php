@@ -7,7 +7,12 @@ it(
     'test that all public travels can be retrieved',
     function () {
         $apiResponse = $this
-            ->get(uri: route(RouteName::PUBLIC_TRAVELS_INDEX->value))
+            ->get(
+                uri: route(RouteName::PUBLIC_TRAVELS_INDEX->value),
+                headers: [
+                    'Accept' => 'application/json',
+                ],
+            )
             ->assertSuccessful()
             ->assertJsonIsObject();
 
@@ -29,12 +34,17 @@ it(
         // in order to check that private ones are
         // unavailable
         $apiResponse = $this
-            ->get(uri: route(
-                name: RouteName::PUBLIC_TRAVELS_INDEX->value,
-                parameters: [
-                    'page[size]' => PHP_INT_MAX, // Manually bypass pagination
+            ->get(
+                uri: route(
+                    name: RouteName::PUBLIC_TRAVELS_INDEX->value,
+                    parameters: [
+                        'page[size]' => PHP_INT_MAX, // Manually bypass pagination
+                    ],
+                ),
+                headers: [
+                    'Accept' => 'application/json',
                 ],
-            ))
+            )
             ->assertSuccessful()
             ->assertJsonIsObject();
 

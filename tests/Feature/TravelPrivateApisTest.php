@@ -15,12 +15,17 @@ it(
         // unavailable
         $apiResponse = $this
             ->actingAs($this->makeAdminUser())
-            ->get(uri: route(
-                name: RouteName::PRIVATE_TRAVELS_INDEX->value,
-                parameters: [
-                    'page[size]' => PHP_INT_MAX, // Manually bypass pagination
+            ->get(
+                uri: route(
+                    name: RouteName::PRIVATE_TRAVELS_INDEX->value,
+                    parameters: [
+                        'page[size]' => PHP_INT_MAX, // Manually bypass pagination
+                    ],
+                ),
+                headers: [
+                    'Accept' => 'application/json',
                 ],
-            ))
+            )
             ->assertSuccessful()
             ->assertJsonIsObject();
 
@@ -109,7 +114,7 @@ it(
 );
 
 it(
-    'test that a travel cannot be created if moods not compliant',
+    'test that a travel cannot be created if moods are not compliant',
     function () {
         $travelData = Travel::factory()
             ->makeOne()

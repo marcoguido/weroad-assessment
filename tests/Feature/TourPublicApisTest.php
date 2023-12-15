@@ -3,6 +3,7 @@
 use App\Models\Tour;
 use App\Models\Travel;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Tests\Feature\Constants\RouteName;
 
 it(
@@ -23,6 +24,9 @@ it(
                         'page[size]' => PHP_INT_MAX, // Manually bypass pagination
                     ],
                 ),
+                headers: [
+                    'Accept' => 'application/json',
+                ],
             )
             ->assertSuccessful()
             ->assertJsonIsObject();
@@ -46,6 +50,24 @@ it(
 );
 
 it(
+    'test that fetching tours of a non-existing travel (by slug) results in a 404 error',
+    function () {
+        $this
+            ->get(
+                uri: route(
+                    name: RouteName::PUBLIC_TRAVEL_TOURS_INDEX->value,
+                    parameters: Str::uuid()->toString(),
+                ),
+                headers: [
+                    'Accept' => 'application/json',
+                ],
+            )
+            ->assertNotFound()
+            ->assertJsonIsObject();
+    },
+);
+
+it(
     'test that all tours of a public travel can be retrieved and be sorted by price',
     function (string $sortingDirection) {
         /** @var Travel $travel */
@@ -64,6 +86,9 @@ it(
                         'page[size]' => PHP_INT_MAX, // Manually bypass pagination
                     ],
                 ),
+                headers: [
+                    'Accept' => 'application/json',
+                ],
             )
             ->assertSuccessful()
             ->assertJsonIsObject();
@@ -110,6 +135,9 @@ it(
                         'page[size]' => PHP_INT_MAX, // Manually bypass pagination
                     ],
                 ),
+                headers: [
+                    'Accept' => 'application/json',
+                ],
             )
             ->assertSuccessful()
             ->assertJsonIsObject();
@@ -178,6 +206,9 @@ it(
                         'page[size]' => PHP_INT_MAX, // Manually bypass pagination
                     ],
                 ),
+                headers: [
+                    'Accept' => 'application/json',
+                ],
             )
             ->assertSuccessful()
             ->assertJsonIsObject();
@@ -245,6 +276,9 @@ it(
                         'page[size]' => PHP_INT_MAX, // Manually bypass pagination
                     ],
                 ),
+                headers: [
+                    'Accept' => 'application/json',
+                ],
             )
             ->assertSuccessful()
             ->assertJsonIsObject();
