@@ -31,6 +31,9 @@ services:
         depends_on:
             - mariadb
         image: phpmyadmin/phpmyadmin
+        volumes:
+            - ./phpMyAdmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+            - ./phpMyAdmin/themes/blueberry:/var/www/html/themes/blueberry
         ports:
             - "8081:80"
         environment:

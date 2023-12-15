@@ -5,12 +5,12 @@ namespace App\Actions\User;
 use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
-class FindUserByEmail
+readonly class FindUserByEmail
 {
     /**
      * @var Builder<User>
      */
-    private readonly Builder $userQuery;
+    private Builder $userQuery;
 
     public function __construct()
     {

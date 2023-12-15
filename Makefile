@@ -3,6 +3,7 @@
 ########################################################################################################################
 include .env
 export $(shell sed 's/=.*//' .env)
+export COMPOSE_PROJECT_NAME=weroad-assessment
 
 ########################################################################################################################
 ### Makefile tasks
@@ -64,6 +65,13 @@ api-docs:
 		-f docker/docker-compose.yml \
 		-f docker/docker-compose.$(APP_ENV).yml \
 		exec php bash -ci 'composer generate-api-docs'
+
+# Runs test suite against **feature** tests
+run-feature-tests:
+	@docker compose \
+		-f docker/docker-compose.yml \
+		-f docker/docker-compose.$(APP_ENV).yml \
+		exec php bash -ci 'composer test'
 
 # Generates a new user with administrative privileges
 admin-user:

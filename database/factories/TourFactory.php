@@ -36,4 +36,25 @@ class TourFactory extends Factory
             'price' => $this->faker->numberBetween(int1: 100),
         ];
     }
+
+    /**
+     * Sets the duration of the tour
+     *
+     * @return Factory<Tour>
+     */
+    public function ofDays(int $amount): Factory
+    {
+        return $this->state(function (array $attributes) use ($amount) {
+            $tourStartingDate = CarbonImmutable::parse('tomorrow');
+            $tourEndingDate = $tourStartingDate->add(
+                unit: 'day',
+                value: $amount,
+            );
+
+            return [
+                'startingDate' => $tourStartingDate->format(Tour::DATE_FORMAT),
+                'endingDate' => $tourEndingDate->format(Tour::DATE_FORMAT),
+            ];
+        });
+    }
 }

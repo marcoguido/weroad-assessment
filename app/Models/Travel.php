@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Concerns\HasIdentifier;
 use App\Models\Identifiers\TravelId;
+use Database\Factories\TravelFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,7 @@ use Spatie\Sluggable\SlugOptions;
 
 /**
  * @property string $id
+ * @property TravelId $identifier
  * @property bool $isPublic
  * @property string $slug
  * @property string $name
@@ -24,6 +26,9 @@ use Spatie\Sluggable\SlugOptions;
  * @property Collection<integer, string> $moods
  * @property Carbon $createdAt
  * @property Carbon $updatedAt
+ * @property-read Collection<integer, Tour> $tours
+ *
+ * @method static TravelFactory factory($count = null, $state = [])
  */
 class Travel extends Model
 {

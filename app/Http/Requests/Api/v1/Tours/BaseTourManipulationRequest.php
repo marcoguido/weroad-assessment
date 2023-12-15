@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\v1\Tours;
 
 use App\Http\Requests\Api\v1\Tours\Data\TourData;
+use App\Rules\TourDurationCheckRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Spatie\LaravelData\Data;
@@ -27,8 +28,13 @@ abstract class BaseTourManipulationRequest extends FormRequest
         return [
             'travelId' => 'required|uuid|exists:travels,id',
             'name' => 'required|string|max:255',
-            'startingDate' => 'required|date|after:now',
-            'endingDate' => 'required|date|after:startingDate',
+            'startingDate' => 'required|date_format:Y-m-d|after:now',
+            'endingDate' => [
+                'required',
+                'date_format:Y-m-d',
+                'after:startingDate',
+                new TourDurationCheckRule(),
+            ],
             'price' => 'required|integer|min:0',
         ];
     }

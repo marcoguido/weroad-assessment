@@ -7,10 +7,10 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class GetPaginatedTravels
+readonly class GetPaginatedTravels
 {
     public function __construct(
-        private readonly Travel $model,
+        private Travel $model,
     ) {
     }
 

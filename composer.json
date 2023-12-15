@@ -24,6 +24,9 @@
         "laravel/pint": "^1.13",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
+        "pestphp/pest": "^2.28",
+        "pestphp/pest-plugin-faker": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.2",
         "phpunit/phpunit": "^10.1",
         "spatie/laravel-ignition": "^2.0"
     },
@@ -56,6 +59,13 @@
         ],
         "generate-api-docs": [
             "@php artisan openapi:generate > public/openapi.json"
+        ],
+        "test": [
+            "@putenv APP_ENV=testing",
+            "@putenv LOG_CHANNEL=stderr",
+            "@putenv DB_DATABASE=testing",
+            "@putenv MAIL_MAILER=log",
+            "./vendor/bin/pest"
         ]
     },
     "extra": {
