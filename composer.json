@@ -60,6 +60,9 @@
         "generate-api-docs": [
             "@php artisan openapi:generate > public/openapi.json"
         ],
+        "lint": [
+            "./vendor/bin/pint"
+        ],
         "test": [
             "@putenv APP_ENV=testing",
             "@putenv LOG_CHANNEL=stderr",

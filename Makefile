@@ -50,7 +50,7 @@ sources-cleanup:
 	@docker compose \
 		-f docker/docker-compose.yml \
 		-f docker/docker-compose.$(APP_ENV).yml \
-		exec php bash -ci 'vendor/bin/pint'
+		exec php bash -ci 'composer lint'
 
 # Updates all composer dependencies
 do-composer-update:
