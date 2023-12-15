@@ -170,7 +170,7 @@ it(
         // Perform API call and save the response
         $apiResponse = $this
             ->get(
-                uri: $url = route(
+                uri: route(
                     name: RouteName::PUBLIC_TRAVEL_TOURS_INDEX->value,
                     parameters: [
                         'travel' => $travel->slug,
