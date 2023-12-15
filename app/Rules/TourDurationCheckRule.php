@@ -30,7 +30,7 @@ class TourDurationCheckRule implements DataAwareRule, ValidationRule
         /** @var Travel $travel */
         $travel = Travel::query()->find($this->data['travelId']);
 
-        $tourEndingDate = Carbon::parse($attribute);
+        $tourEndingDate = Carbon::parse($value);
         $tourStartingDate = Carbon::parse($this->data['startingDate']);
         $tourDuration = $tourEndingDate->diffInDays($tourStartingDate);
 
