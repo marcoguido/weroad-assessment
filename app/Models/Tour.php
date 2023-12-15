@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Concerns\HasIdentifier;
 use App\Models\Identifiers\TourId;
 use Database\Factories\TourFactory;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -54,8 +55,8 @@ class Tour extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'startingDate' => 'date',
-        'endingDate' => 'date',
+        'startingDate' => 'date:'.self::DATE_FORMAT,
+        'endingDate' => 'date:'.self::DATE_FORMAT,
         'price' => 'integer',
     ];
 
@@ -78,5 +79,13 @@ class Tour extends Model
         return Attribute::make(
             get: fn () => $this->price / 100,
         );
+    }
+
+    /**
+     * Prepare a date for array / JSON serialization.
+     */
+    protected function serializeDate(DateTimeInterface $date): string
+    {
+        return $date->format(self::DATE_FORMAT);
     }
 }

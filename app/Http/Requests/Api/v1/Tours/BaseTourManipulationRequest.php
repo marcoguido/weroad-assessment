@@ -28,10 +28,10 @@ abstract class BaseTourManipulationRequest extends FormRequest
         return [
             'travelId' => 'required|uuid|exists:travels,id',
             'name' => 'required|string|max:255',
-            'startingDate' => 'required|date|after:now',
+            'startingDate' => 'required|date_format:Y-m-d|after:now',
             'endingDate' => [
                 'required',
-                'date',
+                'date_format:Y-m-d',
                 'after:startingDate',
                 new TourDurationCheckRule(),
             ],
