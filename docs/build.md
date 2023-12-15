@@ -18,7 +18,8 @@
 3. Pull all `composer` dependencies, create Docker containers and API documentation by running `make`
 4. Start the application either by running `make up` or `make up-d` (Docker will run as daemon with this one)
 5. Setup database structure and install default data by running `make run-fresh-migrations`
-6. Open a new browser window and head to `http://localhost`, you'll be greeted by a default Laravel window
+6. [Open a new browser window](http://localhost), you'll be greeted by the default Laravel installation screen: the
+   configuration is now completed!
 
 ## Utils
 
