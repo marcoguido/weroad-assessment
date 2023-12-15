@@ -114,7 +114,7 @@ it(
 )->with('sortingDirections');
 
 it(
-    'test that public tours of a travel can be filtered by baseline price',
+    'test that public tours of a travel can be filtered by price',
     function (string $filterName) {
         /** @var Travel $travel */
         $travel = Travel::query()

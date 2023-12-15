@@ -117,7 +117,7 @@ it(
 )->with('sortingDirections');
 
 it(
-    'test that tours of a travel can be filtered by baseline price',
+    'test that tours of a travel can be filtered by price',
     function (string $filterName) {
         /** @var Travel $travel */
         $travel = Travel::query()
@@ -331,7 +331,7 @@ it(
 );
 
 it(
-    'test that new tours of a travel can be created',
+    'test that new tours can be created',
     function () {
         /** @var Travel $travel */
         $travel = Travel::query()
@@ -381,7 +381,7 @@ it(
 );
 
 it(
-    'test that new tours cannot be created if duration is not compliant with parent travel',
+    'test that new tour cannot be created if duration is not compliant with travel duration',
     function () {
         $travel = Travel::factory()
             ->state([
