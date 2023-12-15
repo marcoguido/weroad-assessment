@@ -6,18 +6,19 @@ use App\Http\Requests\Api\v1\Tours\Data\TourData;
 use App\Models\Identifiers\TourId;
 use App\Models\Tour;
 
-class UpdateTour
+readonly class UpdateTour
 {
     public function __construct(
-        private readonly Tour $model,
+        private Tour $model,
     ) {
     }
 
     public function execute(TourId $tourId, TourData $data): Tour
     {
+        /** @var Tour $tourModel */
         $tourModel = $this->model
             ->newQuery()
-            ->find($tourId);
+            ->findOrFail($tourId);
         $tourModel->update($data->toArray());
 
         return $tourModel->refresh();

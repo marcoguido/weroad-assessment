@@ -15,7 +15,7 @@ In order to test the public APIs, open your testing tool of choice and create a 
 - Base url: `http://localhost/`
 - Path: use the API-specific path (public ones all starts with `api/public/`)
 - Headers:
-  - `Accept` with the value of `application/json`
+    - `Accept` with the value of `application/json`
 
 Optional query parameters can always be found inside Swagger.
 
@@ -26,11 +26,12 @@ All private APIs are subjected to authentication and require a token to be invok
 #### Authentication API
 
 A call to the login API can be made with the following configuration:
+
 - Endpoint: `http://localhost/api/login`
 - Method: `POST`
 - Headers:
-  - `Accept` with the value of `application/json`
-  - `Content-Type` with the value of `application/json`
+    - `Accept` with the value of `application/json`
+    - `Content-Type` with the value of `application/json`
 - Payload
     ```json
     {
@@ -40,11 +41,12 @@ A call to the login API can be made with the following configuration:
     ```
 
 The server will respond with `201 CREATED` response with a payload similar to the following:
+
 ```json
 {
-  "name": "j8m5RkjHgVjckRnr",
-  "token": "SomeRandomToken",
-  "expires": "2023-11-29T12:47:36.728Z"
+    "name": "j8m5RkjHgVjckRnr",
+    "token": "SomeRandomToken",
+    "expires": "2023-11-29T12:47:36.728Z"
 }
 ```
 
@@ -58,8 +60,14 @@ In order to test private APIs, open your testing tool of choice and create a new
 - Path: use the API-specific path (public ones all starts with `api/admin/`)
 - Method: can be either `GET`, `POST` or `PATCH` according to the specific API
 - Headers:
-    - `Authorization`, filled with the `token` field obtained from the login API 
+    - `Authorization`, filled with the `token` field obtained from the login API
     - `Accept` with the value of `application/json`
     - `Content-Type` with the value of `application/json`, if the request creates o updates something
 - Payload is either empty or a JSON object (see Swagger for all API-specific payloads and examples)
 
+## Feature tests
+
+A suite of tests implemented with `Pest` framework is available to ensure that all APIs are compliant with requirements.
+
+The test suite can be run either by running `make feature-tests` or by spawning a terminal session in main container and
+running `./vendor/bin/pest`.

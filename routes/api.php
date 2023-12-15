@@ -20,26 +20,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', AuthController::class);
+Route::post('/login', AuthController::class)->name('login');
 
 Route::middleware('auth:sanctum')
     ->prefix('admin')
     ->group(function () {
         Route::prefix('/travels')->group(function () {
-            Route::get('/', [ListTravelsController::class, 'asAdministrator']);
-            Route::post('/', CreateTravelController::class);
-            Route::patch('/{travelId}', UpdateTravelController::class);
-            Route::get('/{travelId}/tours', [ListToursController::class, 'byTravelId']);
+            Route::name('api.admin.travels.index')
+                ->get('/', [ListTravelsController::class, 'asAdministrator']);
+
+            Route::name('api.admin.travels.create')
+                ->post('/', CreateTravelController::class);
+
+            Route::name('api.admin.travels.update')
+                ->patch('/{travelId}', UpdateTravelController::class);
+
+            Route::name('api.admin.travel-tours.index')
+                ->get('/{travelId}/tours', [ListToursController::class, 'byTravelId']);
         });
 
         Route::prefix('/tours')->group(function () {
-            Route::post('/', CreateTourController::class);
-            Route::patch('/{tourId}', UpdateTourController::class);
+            Route::name('api.admin.travel-tours.create')
+                ->post('/', CreateTourController::class);
+
+            Route::name('api.admin.travel-tours.update')
+                ->patch('/{tourId}', UpdateTourController::class);
         });
     });
 
 Route::prefix('public')
     ->group(function () {
-        Route::get('/travels', [ListTravelsController::class, 'publiclyAvailable']);
-        Route::get('/travels/{travel:slug}/tours', [ListToursController::class, 'byTravelSlug']);
+        Route::name('api.public.travels.index')
+            ->get('/travels', [ListTravelsController::class, 'publiclyAvailable']);
+
+        Route::name('api.public.travel-tours.index')
+            ->get('/travels/{travel:slug}/tours', [ListToursController::class, 'byTravelSlug']);
     });

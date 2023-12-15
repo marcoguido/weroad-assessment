@@ -18,10 +18,13 @@ class TravelSeeder extends Seeder
     {
         $travelsAmount = rand(min: 20, max: 100);
         for ($travelIndex = 0; $travelIndex < $travelsAmount; $travelIndex++) {
-            $toursAmount = rand(min: 5, max: 20);
-            Travel::factory()
-                ->has(Tour::factory()->count($toursAmount))
-                ->create();
+            $travel = Travel::factory()->create();
+            Tour::factory(rand(min: 5, max: 20))
+                ->state([
+                    'travelId' => $travel->id,
+                ])
+                ->ofDays($travel->numberOfDays)
+                ->createMany();
         }
 
         $this->command

@@ -3,7 +3,12 @@
 namespace App\Http\Responses\Api\V1\Resources;
 
 use App\Models\Tour;
+use DateTime;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Attributes\WithTransformer;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer;
 
 class TourResource extends Data
 {
@@ -11,9 +16,17 @@ class TourResource extends Data
         public readonly string $id,
         public readonly string $travelId,
         public readonly string $name,
-        public readonly string $startingDate,
-        public readonly string $endingDate,
+        #[WithCast(DateTimeInterfaceCast::class)]
+        #[WithTransformer(DateTimeInterfaceTransformer::class, format: Tour::DATE_FORMAT)]
+        public readonly DateTime $startingDate,
+        #[WithCast(DateTimeInterfaceCast::class)]
+        #[WithTransformer(DateTimeInterfaceTransformer::class, format: Tour::DATE_FORMAT)]
+        public readonly DateTime $endingDate,
         public readonly int $price,
+        #[WithCast(DateTimeInterfaceCast::class)]
+        public readonly DateTime $createdAt,
+        #[WithCast(DateTimeInterfaceCast::class)]
+        public readonly DateTime $updatedAt,
     ) {
     }
 
@@ -23,9 +36,11 @@ class TourResource extends Data
             $tour->id,
             $tour->travelId,
             $tour->name,
-            $tour->startingDate->format(Tour::DATE_FORMAT),
-            $tour->endingDate->format(Tour::DATE_FORMAT),
+            $tour->startingDate,
+            $tour->endingDate,
             $tour->price,
+            $tour->createdAt,
+            $tour->updatedAt,
         );
     }
 }

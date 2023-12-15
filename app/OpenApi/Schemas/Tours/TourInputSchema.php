@@ -26,11 +26,13 @@ class TourInputSchema extends TourSchema implements Reusable
             Schema::string('startingDate')
                 ->format(Schema::FORMAT_DATE)
                 ->nullable(false)
-                ->required(),
+                ->required()
+                ->example('2023-01-01'),
             Schema::string('endingDate')
                 ->format(Schema::FORMAT_DATE)
                 ->nullable(false)
-                ->required(),
+                ->required()
+                ->example('2023-01-10'),
             Schema::integer('price')
                 ->minimum(0)
                 ->nullable(false)

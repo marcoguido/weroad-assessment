@@ -15,11 +15,11 @@ use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class GetPaginatedTravelTours
+readonly class GetPaginatedTravelTours
 {
     public function __construct(
-        private readonly Tour $model,
-        private readonly Travel $travelModel,
+        private Tour $model,
+        private Travel $travelModel,
     ) {
     }
 
@@ -31,6 +31,7 @@ class GetPaginatedTravelTours
      */
     public function execute(TravelId $travelId, bool $publicTravelToursOnly = false): LengthAwarePaginator
     {
+        // Ensure travel exists: otherwise throw a 404 error
         /** @var Travel $travel */
         $travel = $this->travelModel::query()->findOrFail($travelId);
 

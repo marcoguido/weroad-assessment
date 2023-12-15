@@ -4,6 +4,7 @@ namespace App\OpenApi\Parameters;
 
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
+use Illuminate\Support\Str;
 use Vyuldashev\LaravelOpenApi\Factories\ParametersFactory;
 
 class TourUpdateParameters extends ParametersFactory
@@ -18,7 +19,9 @@ class TourUpdateParameters extends ParametersFactory
                 ->name('tourId')
                 ->description('Tour identifier')
                 ->required()
-                ->schema(Schema::string()),
+                ->schema(
+                    Schema::string()->example(Str::uuid()->toString()),
+                ),
         ];
     }
 }

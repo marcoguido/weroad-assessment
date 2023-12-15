@@ -4,6 +4,7 @@ namespace App\OpenApi\Parameters;
 
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Parameter;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
+use Illuminate\Support\Str;
 
 class ListToursByTravelIdParameters extends AbstractToursListingParameters
 {
@@ -17,7 +18,9 @@ class ListToursByTravelIdParameters extends AbstractToursListingParameters
                 ->name('travelId')
                 ->description('Travel identifier')
                 ->required()
-                ->schema(Schema::string()),
+                ->schema(
+                    Schema::string()->example(Str::uuid()->toString()),
+                ),
             ...parent::build(),
         ];
     }

@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Auth\LoginRequest;
 use App\OpenApi\RequestBodies\DoLoginRequestBody;
 use App\OpenApi\Responses\LoginResponse;
-use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
@@ -19,7 +20,7 @@ class AuthController extends Controller
     /**
      * Login entrypoint to get a new JWT for further API calls
      *
-     * @throws AuthorizationException
+     * @throws AuthenticationException
      */
     #[OpenApi\Operation(
         tags: ['Auth'],
@@ -33,13 +34,19 @@ class AuthController extends Controller
     public function __invoke(FindUserByEmail $userFinder, LoginRequest $request): JsonResponse
     {
         if (! Auth::attempt($request->getCredentials())) {
-            throw new AuthorizationException('Either username or password are invalid');
+            throw new AuthenticationException('Either username or password are invalid');
         }
 
         $apiToken = $userFinder->execute(
             email: $request->getEmail(),
             failIfNotFound: true,
-        )->createToken(Str::random());
+        )
+            ->createToken(
+                name: Str::random(),
+                expiresAt: Carbon::now()->addMinutes(
+                    config('sanctum.expiration'),
+                ),
+            );
 
         return new JsonResponse(
             data: [

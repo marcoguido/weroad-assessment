@@ -19,7 +19,8 @@ class CreateNewAdminUser extends Command
      */
     protected $signature = "make:admin-user
                             {email? : User's email}
-                            {name? : User's full name}";
+                            {name? : User's full name}
+                            {password? : User's password}";
 
     /**
      * The console command description.
@@ -51,7 +52,7 @@ class CreateNewAdminUser extends Command
         $this->info('User successfully created!');
 
         $this->getOutput()
-            ->horizontalTable(
+            ->table(
                 headers: [
                     'Name',
                     'Email',
@@ -130,14 +131,27 @@ class CreateNewAdminUser extends Command
 
     private function getPasswordArgument(): string
     {
+        $minimumPasswordLength = User::MINIMUM_PASSWORD_LENGTH;
+
+        $providedPassword = trim($this->argument('password'));
+        if (strlen($providedPassword) > $minimumPasswordLength) {
+            return $providedPassword;
+        }
+
+        if (empty($providedPassword)) {
+            $this->warn('No password was provided.');
+        } else {
+            $this->error('Provided password is not valid, try again');
+        }
+
         return password(
             label: "What will user's password be?",
             required: true,
             validate: fn (string $value) => match (true) {
-                strlen($value) < 8 => 'The password must be at least 8 characters long.',
+                strlen($value) < $minimumPasswordLength => "The password must be at least $minimumPasswordLength characters long.",
                 default => null,
             },
-            hint: 'Password should be at least 8 characters long',
+            hint: "Password should be at least $minimumPasswordLength characters long",
         );
     }
 }
