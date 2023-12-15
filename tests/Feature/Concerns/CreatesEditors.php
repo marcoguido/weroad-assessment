@@ -3,9 +3,7 @@
 namespace Tests\Feature\Concerns;
 
 use App\Constants\UserRole;
-use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Str;
 
 trait CreatesEditors
 {

@@ -18,7 +18,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 readonly class GetPaginatedTravelTours
 {
     public function __construct(
-        private Tour   $model,
+        private Tour $model,
         private Travel $travelModel,
     ) {
     }

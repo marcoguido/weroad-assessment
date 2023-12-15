@@ -1,8 +1,5 @@
 <?php
 
-use App\Constants\UserRole;
-use App\Models\Role;
-use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Tests\Feature\Constants\RouteName;
