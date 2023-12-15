@@ -15,9 +15,10 @@ readonly class UpdateTour
 
     public function execute(TourId $tourId, TourData $data): Tour
     {
+        /** @var Tour $tourModel */
         $tourModel = $this->model
             ->newQuery()
-            ->find($tourId);
+            ->findOrFail($tourId);
         $tourModel->update($data->toArray());
 
         return $tourModel->refresh();
